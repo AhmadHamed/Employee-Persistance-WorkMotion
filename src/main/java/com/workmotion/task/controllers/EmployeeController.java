@@ -30,12 +30,24 @@ public class EmployeeController {
     return new ResponseEntity<>(employeeService.createEmployee(dto), HttpStatus.CREATED);
   }
 
+  /**
+   * An end-point to update employee state to a value of [ADDED, IN_CHECK, APPROVED, ACTIVE]
+   *
+   * @param state must adhere to the values in {@link EmployeeState}
+   * @return ok (200)
+   */
   @PatchMapping("/{state}")
   public ResponseEntity<Void> updateEmployeeState(@PathVariable EmployeeState state) {
     employeeService.updateEmployeeState(state);
     return ResponseEntity.ok().build();
   }
 
+  /**
+   * An end-point to get paginated employees
+   *
+   * @param pageable used to declare the [page, size, direction]
+   * @return a page of employees
+   */
   @GetMapping
   public ResponseEntity<Page<Employee>> getEmployees(@PageableDefault Pageable pageable) {
     return ResponseEntity.ok(employeeService.getEmployees(pageable));
