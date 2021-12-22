@@ -1,4 +1,4 @@
-package com.workmotion.task.states;
+package com.workmotion.task.states.enums;
 
 public enum EmployeeState {
   ADDED,

@@ -2,7 +2,7 @@ package com.workmotion.task.factories;
 
 import com.workmotion.task.dtos.CreateEmployeeDto;
 import com.workmotion.task.entities.Employee;
-import com.workmotion.task.states.EmployeeState;
+import com.workmotion.task.states.enums.EmployeeState;
 
 import java.time.LocalDate;
 

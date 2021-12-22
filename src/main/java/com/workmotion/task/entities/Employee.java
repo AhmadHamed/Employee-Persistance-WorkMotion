@@ -1,19 +1,19 @@
 package com.workmotion.task.entities;
 
-import com.workmotion.task.states.EmployeeState;
+import com.workmotion.task.states.enums.EmployeeState;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 
 @Entity
-@Setter
 @Getter
 @NoArgsConstructor
+@ToString
 public class Employee {
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", nullable = false, updatable = false)
   private Long id;
 
@@ -21,11 +21,16 @@ public class Employee {
   private String contractInfo;
   private Integer age;
   private EmployeeState state;
+  @Version private Long version;
 
   public Employee(String name, String contractInfo, Integer age, EmployeeState state) {
     this.name = name;
     this.contractInfo = contractInfo;
     this.age = age;
+    this.state = state;
+  }
+
+  public void changeState(EmployeeState state) {
     this.state = state;
   }
 }

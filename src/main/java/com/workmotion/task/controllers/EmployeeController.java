@@ -3,7 +3,8 @@ package com.workmotion.task.controllers;
 import com.workmotion.task.dtos.CreateEmployeeDto;
 import com.workmotion.task.entities.Employee;
 import com.workmotion.task.services.EmployeeService;
-import com.workmotion.task.states.EmployeeState;
+import com.workmotion.task.states.enums.EmployeeState;
+import com.workmotion.task.states.enums.StateDirection;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -31,18 +32,6 @@ public class EmployeeController {
   }
 
   /**
-   * An end-point to update employee state to a value of [ADDED, IN_CHECK, APPROVED, ACTIVE]
-   *
-   * @param state must adhere to the values in {@link EmployeeState}
-   * @return ok (200)
-   */
-  @PatchMapping("/{state}")
-  public ResponseEntity<Void> updateEmployeeState(@PathVariable EmployeeState state) {
-    employeeService.updateEmployeeState(state);
-    return ResponseEntity.ok().build();
-  }
-
-  /**
    * An end-point to get paginated employees
    *
    * @param pageable used to declare the [page, size, direction]
@@ -51,5 +40,18 @@ public class EmployeeController {
   @GetMapping
   public ResponseEntity<Page<Employee>> getEmployees(@PageableDefault Pageable pageable) {
     return ResponseEntity.ok(employeeService.getEmployees(pageable));
+  }
+
+  /**
+   * An end-point to update employee state to a value of [ADDED, IN_CHECK, APPROVED, ACTIVE]
+   *
+   * @param stateDirection must adhere to the values in {@link EmployeeState}
+   * @return ok (200)
+   */
+  @PatchMapping("/{name}/{stateDirection}")
+  public ResponseEntity<Void> updateEmployeeState(
+      @PathVariable String name, @PathVariable StateDirection stateDirection) {
+    employeeService.updateEmployeeState(name, stateDirection);
+    return ResponseEntity.ok().build();
   }
 }
