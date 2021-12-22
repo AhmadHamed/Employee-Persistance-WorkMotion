@@ -17,7 +17,7 @@ mvn clean install
 ```
 this will start installing the needed dependencies, index the project & clean it
 
-Then there are several ways to run a Spring Boot application on your local machine. One way is to execute the `main` method in the `com.jumia.JumiaProgrammingExerciseApplication.java` class from your IDE.
+Then there are several ways to run a Spring Boot application on your local machine. One way is to execute the `main` method in the `com.workmotion.task.WorkmotionTaskApplication.java` class from your IDE.
 
 Alternatively you can use the [Spring Boot Maven plugin](https://docs.spring.io/spring-boot/docs/current/reference/html/build-tool-plugins-maven-plugin.html) like so:
 
